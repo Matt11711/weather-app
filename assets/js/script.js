@@ -1,5 +1,3 @@
-https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&appid=61d65336c26f3aab8d79e21de8c8e05c
-http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=61d65336c26f3aab8d79e21de8c8e05c
 
 var currentWeatherEl = document.querySelector("#current-weather")
 var dailyForecastEl = document.querySelector("#daily-forecast")
@@ -57,16 +55,27 @@ currentWeatherEl.appendChild(wind)
 humidity.textContent = "Humidity: " + data.current.humidity + " %"
 currentWeatherEl.appendChild(humidity)
 uv.textContent = "UV Index: " 
-var uvData = document.createElement("span")
-uvData.textContent = data.current.uvi
-uv.append(uvData)
+var uvDataEl = document.createElement("span")
+var uvData = data.current.uvi
+uvDataEl.textContent = uvData
+if (uvData<3) {
+uvDataEl.classList.add("bg-success")
+}
+else if (uvData<6) {
+    uvDataEl.classList.add("bg-warning")
+}
+else {
+    uvData.classList.add("bg-danger")
+}
+uv.append(uvDataEl)
 currentWeatherEl.appendChild(uv)
 }
 
 function dailyForecast(data) {
    var sectionTitle = document.createElement("h3")
    sectionTitle.textContent = "5-Day Forecast:"
-   dailyForecastEl.appendChild(sectionTitle)
+   document.querySelector("#weather-container").insertBefore(sectionTitle,dailyForecastEl)
+//    dailyForecastEl.appendChild(sectionTitle)
     for (i=1;i<6;i++) {
         var weatherCard = document.createElement("div")
         var currentDate = new Date(data.daily[i].dt*1000)
@@ -87,6 +96,8 @@ wind.textContent = "Wind: " + data.current.wind_speed + " MPH"
 weatherCard.appendChild(wind)
 humidity.textContent = "Humidity: " + data.current.humidity + " %"
 weatherCard.appendChild(humidity)
+weatherCard.classList.add("col-2")
+weatherCard.classList.add("bg-primary")
         dailyForecastEl.appendChild(weatherCard)
     }
 }
@@ -105,9 +116,12 @@ function addSavedCity(city) {
 }
 function loadSavedCities() {
 var savedCities = JSON.parse(localStorage.getItem("city"))
-cityArray = savedCities
+
+if (savedCities) {
+    cityArray = savedCities
 for (i=0;i<savedCities.length;i++) {
     addSavedCity(savedCities[i])
+}
 }
 }
 searchButton.onclick = function(event){
