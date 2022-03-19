@@ -52,7 +52,7 @@ console.log(data.current.dt)
 var currentDate = new Date(data.current.dt*1000)
 console.log(currentDate)
 // shows the city name, date, and weather icon
-weatherTitle.innerHTML = city +" (" + (currentDate.getMonth()+1)+ "/"+currentDate.getDate() + "/"+currentDate.getFullYear()+ ")" + "<img src=' http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png'/>"
+weatherTitle.innerHTML = city +" (" + (currentDate.getMonth()+1)+ "/"+currentDate.getDate() + "/"+currentDate.getFullYear()+ ")" + "<img src=' https://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png'/>"
 currentWeatherEl.appendChild(weatherTitle)
 
 temp.textContent = "Temp: " + data.current.temp + "°F"
@@ -99,7 +99,7 @@ var humidity = document.createElement("p")
 todayDateEl.textContent = (currentDate.getMonth()+1)+ "/"+currentDate.getDate() + "/"+currentDate.getFullYear()
 
 weatherCard.appendChild(todayDateEl)
-weatherIcon.src= "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png"
+weatherIcon.src= "https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png"
 weatherCard.appendChild(weatherIcon)
 temp.textContent = "Temp: " + data.current.temp + "°F"
 weatherCard.appendChild(temp)
