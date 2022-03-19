@@ -9,7 +9,7 @@ cityArray = []
 
 // fetches a geolocator api to get the latitute and longitude from a city name and pass it through
 var getLatLon = function(city) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=61d65336c26f3aab8d79e21de8c8e05c";
+    var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=61d65336c26f3aab8d79e21de8c8e05c";
   
     fetch(apiUrl).then(function(response) {
       if (response.ok) {
